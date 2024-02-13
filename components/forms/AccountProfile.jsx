@@ -2,7 +2,6 @@
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -114,6 +113,7 @@ const AccountProfile = ({ user, btnTitle }) => {
                   onChange={(e) => handleImage(e, field.onChange)}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -132,6 +132,7 @@ const AccountProfile = ({ user, btnTitle }) => {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -150,6 +151,7 @@ const AccountProfile = ({ user, btnTitle }) => {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
@@ -168,11 +170,12 @@ const AccountProfile = ({ user, btnTitle }) => {
                   {...field}
                 />
               </FormControl>
+              <FormMessage />
             </FormItem>
           )}
         />
         <Button type="submit" className="bg-primary-500">
-          Submit
+          {btnTitle}
         </Button>
       </form>
     </Form>
