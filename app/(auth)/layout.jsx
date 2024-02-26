@@ -2,8 +2,8 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 import "../globals.css";
 export const metadata = {
-  title: "Blogram",
-  description: "A Next.js 13 Blogram Application",
+  title: "ne13x",
+  description: "A Next.js 13 ne13x Application",
 };
 const inter = Inter({ subsets: ["latin"] });
 export default function RootLayout({ children }) {

@@ -1,10 +1,20 @@
 import PostCard from "@/components/cards/PostCard";
 import { fetchPosts } from "@/lib/actions/post.actions";
 import { currentUser } from "@clerk/nextjs";
+import { fetchUser } from "@/lib/actions/user.actions";
+import { redirect } from "next/navigation";
 
-export default async function Home() {
-  const result = await fetchPosts(1, 30);
+export default async function Home({ searchParams }) {
   const user = await currentUser();
+  if (!user) redirect("/sign-up");
+  const userInfo = await fetchUser(user.id);
+
+  if (!userInfo?.onboarded) redirect("/onboarding");
+
+  const result = await fetchPosts(
+    searchParams.page ? +searchParams.page : 1,
+    30
+  );
   return (
     <>
       <h1 className="head-text text-left">Home</h1>

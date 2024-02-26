@@ -10,8 +10,8 @@ import BottomBar from "@/components/shared/BottomBar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Blogram",
-  description: "A Next.js 13 Blogram Application",
+  title: "ne13x",
+  description: "A Next.js 13 ne13x Application",
 };
 
 export default function RootLayout({ children }) {
