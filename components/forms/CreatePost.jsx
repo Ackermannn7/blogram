@@ -18,9 +18,12 @@ import { usePathname, useRouter } from "next/navigation";
 import { PostValidation } from "@/lib/validations/post";
 import { createPost } from "@/lib/actions/post.actions";
 
+import { useOrganization } from "@clerk/nextjs";
+
 function CreatePost({ userId }) {
   const pathname = usePathname();
   const router = useRouter();
+  const { organization } = useOrganization();
   const form = useForm({
     resolver: zodResolver(PostValidation),
     defaultValues: {
@@ -28,13 +31,12 @@ function CreatePost({ userId }) {
       accountId: userId,
     },
   });
-
   const onSubmit = async (values) => {
     // TODO: CREATE post
     await createPost({
       text: values.post,
       author: userId,
-      communityId: null,
+      communityId: organization ? organization.id : null,
       path: pathname,
     });
     router.push("/");
