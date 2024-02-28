@@ -9,7 +9,6 @@ export default async function Home({ searchParams }) {
   const user = await currentUser();
   if (!user) redirect('/sign-up');
   const userInfo = await fetchUser(user.id);
-
   if (!userInfo?.onboarded) redirect('/onboarding');
 
   const result = await fetchPosts(
@@ -28,10 +27,11 @@ export default async function Home({ searchParams }) {
               <PostCard
                 key={post._id}
                 id={post._id}
-                currentUserId={user?.id}
+                currentUserId={userInfo._id}
                 parentId={post.parentId}
                 content={post.text}
                 author={post.author}
+                likes={post.likes}
                 community={post.community}
                 createdAt={post.createdAt}
                 comments={post.children}

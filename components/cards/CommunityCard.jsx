@@ -36,7 +36,7 @@ function CommunityCard({ id, name, username, imgUrl, bio, members }) {
         {members.length > 0 && (
           <div className='flex items-center'>
             {members.map((member, index) => (
-              <div className='w-7 h-7 relative'>
+              <div key={index} className='w-7 h-7 relative'>
                 <Image
                   key={index}
                   src={member.image}

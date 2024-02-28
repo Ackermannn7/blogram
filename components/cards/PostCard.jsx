@@ -2,11 +2,14 @@ import { formatDateString } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import Like from '../ui/like'; // import { useEffect, useState } from 'react';
+
 const PostCard = ({
   id,
   currentUserId,
   parentId,
   content,
+  likes,
   author,
   community,
   createdAt,
@@ -43,13 +46,7 @@ const PostCard = ({
             <p className='mt-2 text-small-regular text-light-2'>{content}</p>
             <div className={`${isComment && 'mb-10'} mt-5 flex flex-col gap-3`}>
               <div className='flex gap-3.5'>
-                <Image
-                  src='/assets/heart-gray.svg'
-                  alt='heart'
-                  width={24}
-                  height={24}
-                  className='cursor-pointer object-contain'
-                />
+                <Like userId={currentUserId} postId={id} likes={likes} />
                 <Link href={`/post/${id}`}>
                   <Image
                     src='/assets/reply.svg'
