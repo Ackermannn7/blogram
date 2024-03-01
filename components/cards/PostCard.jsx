@@ -16,7 +16,6 @@ const PostCard = ({
   comments,
   isComment,
 }) => {
-  console.log(id, currentUserId, parentId);
   const uniqueImages = new Set();
 
   return (

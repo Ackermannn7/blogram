@@ -12,7 +12,6 @@ const PostsTab = async ({ currentUserId, accountId, accountType }) => {
     result = await fetchUserPosts(accountId);
   }
   if (!result) redirect('/');
-  console.log('PostTab: ', currentUserId, accountId);
   return (
     <section className='mt-9 flex flex-col gap-10'>
       {result.posts.map((post) => (

@@ -6,7 +6,6 @@ import { usePathname, useRouter } from 'next/navigation';
 import { deletePost } from '@/lib/actions/post.actions';
 
 function DeletePost({ postId, currentUserId, authorId, parentId, isComment }) {
-  console.log(postId, currentUserId, authorId, parentId, isComment);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -20,7 +19,7 @@ function DeletePost({ postId, currentUserId, authorId, parentId, isComment }) {
       height={18}
       className='cursor-pointer object-contain'
       onClick={async () => {
-        await deletePost(JSON.parse(postId), pathname);
+        await deletePost(JSON.parse(postId), isComment, pathname);
         if (!parentId || !isComment) {
           router.push('/');
         }
