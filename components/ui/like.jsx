@@ -13,7 +13,6 @@ const Like = ({ postId, userId, likes }) => {
   const pathname = usePathname();
 
   const [isLiked, setIsLiked] = useState(false);
-  console.log(postId, userId, pathname, likes, isLiked);
 
   useEffect(() => {
     const fetchData = async () => {

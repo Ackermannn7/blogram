@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import Like from '../ui/like'; // import { useEffect, useState } from 'react';
-
+import DeletePost from '../forms/DeletePost';
 const PostCard = ({
   id,
   currentUserId,
@@ -16,6 +16,7 @@ const PostCard = ({
   comments,
   isComment,
 }) => {
+  console.log(id, currentUserId, parentId);
   const uniqueImages = new Set();
 
   return (
@@ -47,6 +48,7 @@ const PostCard = ({
             <div className={`${isComment && 'mb-10'} mt-5 flex flex-col gap-3`}>
               <div className='flex gap-3.5'>
                 <Like userId={currentUserId} postId={id} likes={likes} />
+
                 <Link href={`/post/${id}`}>
                   <Image
                     src='/assets/reply.svg'
@@ -122,6 +124,13 @@ const PostCard = ({
           </div>
         </div>
         {/* TODO: DeleteThread */}
+        <DeletePost
+          postId={JSON.stringify(id)}
+          currentUserId={currentUserId}
+          authorId={author._id}
+          parentId={parentId}
+          isComment={isComment}
+        />
         {/* TODO: ShowCommentLogos */}
       </div>
       {!isComment &&
@@ -146,27 +155,29 @@ const PostCard = ({
             <p className='text-subtle-medium text-gray-1'>
               {formatDateString(createdAt)}
             </p>
+            <p className='text-subtle-medium text-gray-1'>
+              {likes.length} {likes.length === 1 ? 'Like' : 'Likes'}
+            </p>
             {comments.length > 0 && (
               <Link
                 href={`/post/${id}`}
                 className='flex items-center text-subtle-medium text-gray-1'
               >
-                {comments.map((comment, index) => {
+                {comments.slice(0, 3).map((comment, index) => {
                   const imageUrl = comment.author.image;
-
                   if (!uniqueImages.has(imageUrl)) {
                     uniqueImages.add(imageUrl);
 
                     return (
-                      <div className='relative w-5 h-5'>
+                      <div
+                        className={`relative w-5 h-5 ${index !== 0 && '-ml-2'}`}
+                        key={index}
+                      >
                         <Image
-                          key={index}
                           src={imageUrl}
                           alt={`user_${index}`}
                           fill
-                          className={`${
-                            index !== 0 && '-ml-2'
-                          } rounded-full object-cover`}
+                          className='rounded-full object-cover'
                         />
                       </div>
                     );
@@ -174,6 +185,7 @@ const PostCard = ({
 
                   return null; // Skip rendering for duplicate images
                 })}
+
                 {comments.length > 3 ? (
                   <p className='ml-1 text-subtle-medium text-gray-1'>
                     {comments.length}+ users
